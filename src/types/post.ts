@@ -1,5 +1,3 @@
-import { RouteComponentProps } from 'react-router';
-
 export interface Post {
   userId: number;
   id: number;
@@ -23,4 +21,9 @@ export interface PostProps {
       id: number;
     };
   };
+}
+
+export interface UserPostProps {
+  post: Post;
+  index: number;
 }

@@ -4,6 +4,7 @@ import { User } from './user';
 interface Actions {
   GET_POSTS: string;
   GET_USERS: string;
+  CLEAR_POSTS: string;
 }
 
 export interface GetUsers {
@@ -14,4 +15,8 @@ export interface GetUsers {
 export interface GetPosts {
   type: Actions['GET_POSTS'];
   payload: Post[];
+}
+
+export interface ClearPosts {
+  type: Actions['CLEAR_POSTS'];
 }

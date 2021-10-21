@@ -49,7 +49,7 @@
 }
 
 .user-table {
-  min-width: 60%;
+  width: 60%;
   margin: auto;
 }
 
@@ -91,4 +91,41 @@
 
 .bg-gray {
   background-color: #f0f0f0;
+}
+
+/* Post css */
+.post-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post-wrapper h1 {
+  width: 100%;
+}
+
+.post-table {
+  width: 60%;
+  margin: auto;
+}
+
+.post-table table {
+  width: 100%;
+  padding: 0.5em 1.5em;
+  border: 1px solid black;
+  border-radius: 0.25em;
+  border-spacing: 0px;
+}
+
+.post-wrapper thead tr {
+  border-bottom: 1px solid;
+}
+
+.post-wrapper thead th {
+  padding: 1em 0.5em;
+  text-align: left;
+}
+
+.post-wrapper tbody td {
+  padding: 0.75em 0.5em;
+  text-align: left;
 }

@@ -1,9 +1,8 @@
 import { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, useLocation, withRouter } from 'react-router';
-import { compose } from 'redux';
 import { getPosts } from '../actions/post';
-import { PostState, PostProps } from '../types/post';
+import { PostState, PostProps, Post } from '../types/post';
+import UserPost from './UserPost';
 
 const User: FC<PostProps> = ({ posts, loading, getPosts, match }) => {
   const { params } = match;
@@ -14,9 +13,9 @@ const User: FC<PostProps> = ({ posts, loading, getPosts, match }) => {
   }, []);
 
   return (
-    <main>
+    <main className="post-wrapper">
       <h1>User's Posts</h1>
-      <div className='post-table'>
+      <div className="post-table">
         <table>
           <thead>
             <tr>
@@ -24,7 +23,13 @@ const User: FC<PostProps> = ({ posts, loading, getPosts, match }) => {
               <th>Body</th>
             </tr>
           </thead>
-          <tbody>{posts && !loading && posts.map()}</tbody>
+          <tbody>
+            {posts &&
+              !loading &&
+              posts.map((post: Post, index: number) => (
+                <UserPost post={post} index={index} />
+              ))}
+          </tbody>
         </table>
       </div>
     </main>

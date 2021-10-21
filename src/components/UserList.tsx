@@ -2,15 +2,17 @@ import { connect } from 'react-redux';
 import { FC, MutableRefObject, useEffect, useRef, useState } from 'react';
 import { getUsers } from '../actions/user';
 import { User, UserState, UserProps } from '../types/user';
-import UserItem from './UserItem';
+import UserListItem from './UserListItem';
+import { clearPosts } from '../actions/post';
 
-const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
+const UserTable: FC<UserProps> = ({ users, loading, getUsers, clearPosts }) => {
   const [filtered, setFiltered] = useState<User[] | null>(null);
 
   const text = useRef() as MutableRefObject<HTMLInputElement>;
 
   useEffect((): void => {
     getUsers();
+    clearPosts();
     // eslint-disable-next-line
   }, []);
 
@@ -20,6 +22,7 @@ const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
     }
   }, [filtered]);
 
+  // Can also be done in the redux cycle
   const handleSearch = () => {
     // Find if search bar has any string
     if (text.current.value !== '') {
@@ -42,14 +45,14 @@ const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
   };
 
   return (
-    <main className='user-wrapper'>
+    <main className="user-wrapper">
       <h1>Users</h1>
-      <div className='user-table'>
-        <div className='user-search'>
+      <div className="user-table">
+        <div className="user-search">
           <input
             ref={text}
-            type='text'
-            placeholder='Search Users'
+            type="text"
+            placeholder="Search Users"
             onChange={handleSearch}
           />
         </div>
@@ -65,12 +68,12 @@ const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
           <tbody>
             {filtered
               ? filtered.map((user: User, index: number) => (
-                  <UserItem key={user.id} index={index} user={user} />
+                  <UserListItem key={user.id} index={index} user={user} />
                 ))
               : users &&
                 !loading &&
                 users.map((user: User, index: number) => (
-                  <UserItem key={user.id} index={index} user={user} />
+                  <UserListItem key={user.id} index={index} user={user} />
                 ))}
           </tbody>
         </table>
@@ -86,4 +89,5 @@ const mapStateToProps = (state: UserState) => ({
 
 export default connect(mapStateToProps, {
   getUsers,
+  clearPosts,
 })(UserTable);

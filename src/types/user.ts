@@ -23,7 +23,7 @@ export interface UserAddress {
   };
 }
 
-export interface UserItemProp {
+export interface UserListItemProp {
   user: User;
   index: number;
   history: object;
@@ -40,4 +40,5 @@ export interface UserProps {
   users: User[];
   loading: boolean;
   getUsers: () => void;
+  clearPosts: () => void;
 }

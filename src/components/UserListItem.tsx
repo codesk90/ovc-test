@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { UserItemProp } from '../types/user';
+import { UserListItemProp } from '../types/user';
 
-const UserItem: FC<UserItemProp & RouteComponentProps> = ({
+const UserListItem: FC<UserListItemProp & RouteComponentProps> = ({
   user,
   index,
   history,
@@ -23,4 +23,4 @@ const UserItem: FC<UserItemProp & RouteComponentProps> = ({
   );
 };
 
-export default withRouter(UserItem);
+export default withRouter(UserListItem);

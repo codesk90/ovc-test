@@ -1,4 +1,4 @@
-import { GET_POSTS } from '../actions/types';
+import { CLEAR_POSTS, GET_POSTS } from '../actions/types';
 import { ActionProps } from '../types/types';
 
 const initialState = {
@@ -14,6 +14,11 @@ const post = (state = initialState, action: ActionProps) => {
         ...state,
         posts: payload,
         loading: false,
+      };
+    case CLEAR_POSTS:
+      return {
+        posts: [],
+        loading: true,
       };
     default:
       return state;
