@@ -33,11 +33,14 @@ const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
     }
   }, [filtered])
 
-  const handleSearch = (e: FormEvent<HTMLInputElement>) => {
+  const handleSearch = () => {
+    // Find if search bar has any string
     if (text.current.value !== '') {
       const {value} = text.current;
+      // Incase of any backslash it replaces it with empty string
       value.replace(/\\/g, '');
 
+      // filtering usering at search
       const filteredUser = users.filter(user => {
         const regex = new RegExp(`${value}`, 'gi')
         return (
@@ -45,8 +48,10 @@ const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
         )
       })
 
+      // set filtered list of users
       setFiltered(filteredUser)
     } else {
+      // otherwise set filter as null to list all of users
       setFiltered(null)
     }
   }
