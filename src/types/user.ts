@@ -28,3 +28,16 @@ export interface UserItemProp {
   index: number;
   history: object;
 }
+
+export interface UserState {
+  user: {
+    users: User[];
+    loading: boolean;
+  };
+}
+
+export interface UserProps {
+  users: User[];
+  loading: boolean;
+  getUsers: () => void;
+}

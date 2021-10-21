@@ -5,11 +5,11 @@ import User from './components/User';
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Router>
         <Switch>
-          <Route exact path="/" component={UserTable} />
-          <Route exact path="/user/:id" component={User} />
+          <Route exact path='/' component={UserTable} />
+          <Route path='/user/:id' component={User} />
         </Switch>
       </Router>
     </div>

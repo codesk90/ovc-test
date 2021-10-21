@@ -1,24 +1,11 @@
 import { connect } from 'react-redux';
-import { FC, FormEvent, MutableRefObject, useEffect, useRef, useState } from 'react';
+import { FC, MutableRefObject, useEffect, useRef, useState } from 'react';
 import { getUsers } from '../actions/user';
-import { User } from '../types/user';
+import { User, UserState, UserProps } from '../types/user';
 import UserItem from './UserItem';
 
-interface UserProps {
-  users: User[];
-  loading: boolean;
-  getUsers: () => void;
-}
-
-interface UserTableState {
-  user: {
-    users: User[];
-    loading: boolean;
-  };
-}
-
 const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
-  const [filtered, setFiltered] = useState<User[] | null>(null)
+  const [filtered, setFiltered] = useState<User[] | null>(null);
 
   const text = useRef() as MutableRefObject<HTMLInputElement>;
 
@@ -31,42 +18,40 @@ const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
     if (filtered === null) {
       text.current.value = '';
     }
-  }, [filtered])
+  }, [filtered]);
 
   const handleSearch = () => {
     // Find if search bar has any string
     if (text.current.value !== '') {
-      const {value} = text.current;
+      const { value } = text.current;
       // Incase of any backslash it replaces it with empty string
       value.replace(/\\/g, '');
 
       // filtering usering at search
-      const filteredUser = users.filter(user => {
-        const regex = new RegExp(`${value}`, 'gi')
-        return (
-          user.name.match(regex)
-        )
-      })
+      const filteredUser = users.filter((user) => {
+        const regex = new RegExp(`${value}`, 'gi');
+        return user.name.match(regex);
+      });
 
       // set filtered list of users
-      setFiltered(filteredUser)
+      setFiltered(filteredUser);
     } else {
       // otherwise set filter as null to list all of users
-      setFiltered(null)
+      setFiltered(null);
     }
-  }
+  };
 
   return (
-    <main className="user-wrapper">
+    <main className='user-wrapper'>
       <h1>Users</h1>
-      <div className="user-table">
-        <div className="user-search">
+      <div className='user-table'>
+        <div className='user-search'>
           <input
             ref={text}
-            type="text"
-            placeholder='Search Users' 
+            type='text'
+            placeholder='Search Users'
             onChange={handleSearch}
-            />
+          />
         </div>
         <table>
           <thead>
@@ -78,16 +63,15 @@ const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
             </tr>
           </thead>
           <tbody>
-            {
-              filtered ?
-              filtered.map((user: User, index: number) => (
-                <UserItem key={user.id} index={index} user={user} />
-              )) :
-              users &&
-              !loading &&
-              users.map((user: User, index: number) => (
-                <UserItem key={user.id} index={index} user={user} />
-              ))}
+            {filtered
+              ? filtered.map((user: User, index: number) => (
+                  <UserItem key={user.id} index={index} user={user} />
+                ))
+              : users &&
+                !loading &&
+                users.map((user: User, index: number) => (
+                  <UserItem key={user.id} index={index} user={user} />
+                ))}
           </tbody>
         </table>
       </div>
@@ -95,7 +79,7 @@ const UserTable: FC<UserProps> = ({ users, loading, getUsers }) => {
   );
 };
 
-const mapStateToProps = (state: UserTableState) => ({
+const mapStateToProps = (state: UserState) => ({
   users: state.user.users,
   loading: state.user.loading,
 });

@@ -3,7 +3,6 @@ import { ActionProps } from '../types/types';
 
 const initialState = {
   loading: true,
-  filtered: null,
   posts: [],
 };
 
@@ -13,7 +12,7 @@ const post = (state = initialState, action: ActionProps) => {
     case GET_POSTS:
       return {
         ...state,
-        packs: payload,
+        posts: payload,
         loading: false,
       };
     default:

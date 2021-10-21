@@ -3,7 +3,6 @@ import { ActionProps } from '../types/types';
 
 const initialState = {
   loading: true,
-  filtered: null,
   users: [],
 };
 
